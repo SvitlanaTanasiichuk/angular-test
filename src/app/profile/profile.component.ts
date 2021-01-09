@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ProfileService} from "../services/profile.service";
-import {Router} from "@angular/router";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ProfileService} from '../services/profile.service';
+import {Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
+import {Observable} from 'rxjs';
+import {CurrentUser} from '../shared/currentUser';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   form: FormGroup;
   submitted: boolean;
+  location$: Observable<CurrentUser>;
 
   constructor(
     private profileService: ProfileService,
@@ -28,7 +31,9 @@ export class ProfileComponent implements OnInit {
       lastName: new FormControl(null, Validators.required),
       gender: new FormControl(null, Validators.required),
       country: new FormControl(null, Validators.required),
-      city: new FormControl(null, Validators.required)
+      city: new FormControl(null, Validators.required),
+      lat: new FormControl(null),
+      lon: new FormControl(null),
     });
   }
 
@@ -37,7 +42,6 @@ export class ProfileComponent implements OnInit {
     return;
   }
   this.submitted = true;
-
   const profile = {
     firstName: this.form.value.firstName,
     lastName: this.form.value.lastName,
@@ -45,12 +49,25 @@ export class ProfileComponent implements OnInit {
     country: this.form.value.country,
     city: this.form.value.city
   };
+
   this.profileService.updateProfile(profile)
     .subscribe(res => {
       this.form.reset();
       this.submitted = false;
-      this.router.navigate(['/map'])
+      this.router.navigate(['/map']);
     });
   }
 
+  // private putLocation() {
+  //   const location = {
+  //     lat: this.form.value.lat,
+  //     lon: this.form.value.lon
+  //   };
+  //   this.profileService.addUserLocation(location)
+  //     .subscribe(res => res);
+  // }
+
+  ngOnDestroy(): void {
+
+  }
 }

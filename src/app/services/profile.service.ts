@@ -23,4 +23,12 @@ export class ProfileService {
           })
         );
     }
+
+    addUserLocation(body): Observable<CurrentUser> {
+      const url = `${environment.apiUrl}/v1/user/location`;
+      return this.http.put(url, body)
+        .pipe(
+          map(res => res['result'])
+        );
+    }
 }

@@ -8,12 +8,13 @@ import { ProfileComponent } from './profile/profile.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { MapComponent } from './map/map.component';
 import { UserComponent } from './user/user.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {AuthModule} from "./auth/auth.module";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {AuthService} from "./auth/services/auth.service";
-import {AuthInterceptor} from "./shared/services/auth.interceptor";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthModule} from './auth/auth.module';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthService} from './auth/services/auth.service';
+import {AuthInterceptor} from './shared/services/auth.interceptor';
 import { HomeComponent } from './home/home.component';
+import {AgmCoreModule} from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,10 @@ import { HomeComponent } from './home/home.component';
     AuthModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBe62-SiV5opsO8Vy6TgoR8F6jjHgaIK_o'
+    })
   ],
   providers: [
     AuthService,

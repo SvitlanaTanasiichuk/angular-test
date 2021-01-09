@@ -1,1 +1,19 @@
-<p>map works!</p>
+<div class="map">
+<agm-map [latitude]="lat"
+         [longitude]="lng"
+         [zoom]="zoom">
+  <agm-marker *ngFor="let user of (users$ | async); let i = index"
+              [label]="user.firstname"
+              [latitude]="user.lat"
+          [longitude]="user.lon">
+
+    <agm-info-window>
+      <strong>User info</strong>
+      <p>{{user.firstname}}</p>
+      <p>{{user.lastName}}</p>
+      <p>{{user.city}}</p>
+      <p>{{user.email}}</p>
+    </agm-info-window>
+  </agm-marker>
+</agm-map>
+</div>

@@ -11,6 +11,7 @@ import {map} from 'rxjs/operators';
 })
 export class UsersListComponent implements OnInit {
   users$: Observable<CurrentUser[]>;
+
   constructor(
     private userService: UsersService) {
   }

@@ -38,6 +38,15 @@
         <small *ngIf="form.get('city').errors.required">Enter city</small>
       </div>
     </div>
+  <div class="form-control">
+    <label for="lat">Latitude</label>
+    <input id="lat" type="text" formControlName="lat">
+  </div>
+  <div class="form-control">
+    <label for="lon">Longitude</label>
+    <input id="lon" type="text" formControlName="lon">
+  </div>
+
   <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid || submitted">Save</button>
 </form>
 
