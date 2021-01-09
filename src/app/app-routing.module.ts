@@ -1,8 +1,30 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {MainLayoutComponent} from './shared/main-layout/main-layout.component';
+import {ProfileComponent} from './profile/profile.component';
+import {UsersListComponent} from './users-list/users-list.component';
+import {MapComponent} from './map/map.component';
+import {UserComponent} from './user/user.component';
+import {LoginComponent} from './auth/components/login/login.component';
+import {RegisterComponent} from './auth/components/register/register.component';
+import {AuthGuard} from './auth/auth.guard';
+import {HomeComponent} from './home/home.component';
 
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '', component: MainLayoutComponent, children: [
+      {path: '', redirectTo: '/', pathMatch: 'full'},
+      {path: '', component: HomeComponent},
+      {path: 'users', component: UsersListComponent, canActivate: [AuthGuard]},
+      {path: 'map', component: MapComponent, canActivate: [AuthGuard]},
+      {path: 'user/:id', component: UserComponent, canActivate: [AuthGuard]},
+      {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+      {path: 'login', component: LoginComponent},
+      {path: 'register', component: RegisterComponent},
+    ]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

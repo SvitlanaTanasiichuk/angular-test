@@ -1,1 +1,153 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: #0984c6;
+  --dark-color: #242323;
+  --light-color: #f4f4f4;
+  --danger-color: #e3727e;
+  --success-color: #064b16;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--primary-color);
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    color: #666;
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  width: 400px;
+  margin: 0 auto;
+}
+
+fieldset {
+  width: 400px;
+  border: none;
+}
+
+img {
+  width: 100%;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 2rem;
+}
+
+.btn-primary,
+.bg-primary {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.btn {
+  display: inline-block;
+  color: #333;
+  padding: 0.2rem 1.3rem;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: opacity 0.2s ease-in;
+  outline: none;
+  border-radius: .3rem;
+
+  &:disabled {
+    cursor: not-allowed;
+    background: var(--light-color);
+    color: #111;
+  }
+}
+
+.form-control {
+  display: block;
+  color: #888;
+  margin-bottom: 1rem;
+
+  .login-validation {
+    color: var(--danger-color);
+  }
+}
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 2rem;
+  z-index: 1;
+  width: 100%;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+  height: 3rem;
+
+  &.main {
+    justify-content: center;
+    border-bottom: 1px solid var(--dark-color);
+  }
+
+  ul {
+    display: flex;
+  }
+
+  li.active a {
+    color:  #fff;
+    font-weight: bold;
+    cursor: default;
+    opacity: 1;
+  }
+
+  a {
+    color: #fff;
+    padding: 0.45rem;
+    margin: 0 0.25rem;
+    opacity: .7;
+
+    &:hover {
+      color: var(--light-color);
+      opacity: 1;
+    }
+  }
+}
+
+.form-control {
+  display: block;
+  color: #888;
+  margin-bottom: .8rem;
+
+  .validation {
+    color: var(--danger-color);
+  }
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+}
