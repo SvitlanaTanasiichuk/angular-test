@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProfileService} from '../services/profile.service';
 import {Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {CurrentUser} from '../shared/currentUser';
 
 @Component({
@@ -14,7 +14,7 @@ import {CurrentUser} from '../shared/currentUser';
 export class ProfileComponent implements OnInit, OnDestroy {
   form: FormGroup;
   submitted: boolean;
-  location$: Observable<CurrentUser>;
+  location$: Observable<any>;
 
   constructor(
     private profileService: ProfileService,
@@ -23,6 +23,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initializeForm();
+  }
+
+  ngOnDestroy(): void {
   }
 
   initializeForm() {
@@ -67,7 +70,5 @@ export class ProfileComponent implements OnInit, OnDestroy {
   //     .subscribe(res => res);
   // }
 
-  ngOnDestroy(): void {
 
-  }
 }

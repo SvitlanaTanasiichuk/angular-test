@@ -1,15 +1,17 @@
+<mat-paginator [length]="100"
+               [pageSize]="10"
+               [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>
 <div class="users">
-  <div>
-    <h3>All users</h3>
-    <div *ngFor="let user of (users$ | async)" class="current-user">
-      <pre><img class="course-thumbnail" [src]="user?.image">
-      <p>{{user.firstname}}</p>
+  <mat-card  *ngFor="let user of (users$ | async)" class="current-user">
+    <mat-card-title>{{user.firstname}}</mat-card-title>
+    <mat-card-content>
+      <img class="course-thumbnail" [src]="user?.image">
       <p>{{user.city}}</p>
       <p>{{user.lastName}}</p>
       <p>{{user.email}}</p>
-      </pre>
-    </div>
-  </div>
+    </mat-card-content>
+</mat-card>
 </div>
 
 

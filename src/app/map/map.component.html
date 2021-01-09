@@ -5,10 +5,11 @@
   <agm-marker *ngFor="let user of (users$ | async); let i = index"
               [label]="user.firstname"
               [latitude]="user.lat"
-          [longitude]="user.lon">
+              [longitude]="user.lon">
 
     <agm-info-window>
       <strong>User info</strong>
+      <p>{{user.id}}</p>
       <p>{{user.firstname}}</p>
       <p>{{user.lastName}}</p>
       <p>{{user.city}}</p>

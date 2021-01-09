@@ -1,11 +1,13 @@
 .users {
- display: flex;
+  display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 .current-user {
   border: 1px solid gray;
-  width: 200px;
+  width: 300px;
   margin: 20px;
+  overflow: hidden;
 }
 
 img {

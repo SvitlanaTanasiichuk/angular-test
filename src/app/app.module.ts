@@ -15,6 +15,9 @@ import {AuthService} from './auth/services/auth.service';
 import {AuthInterceptor} from './shared/services/auth.interceptor';
 import { HomeComponent } from './home/home.component';
 import {AgmCoreModule} from '@agm/core';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatCardModule} from '@angular/material/card';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -32,10 +35,13 @@ import {AgmCoreModule} from '@agm/core';
     AuthModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBe62-SiV5opsO8Vy6TgoR8F6jjHgaIK_o'
-    })
+    }),
+    MatPaginatorModule,
+    MatCardModule,
   ],
   providers: [
     AuthService,
