@@ -4,10 +4,12 @@
 </mat-paginator>
 <div class="users">
   <mat-card  *ngFor="let user of (users$ | async)" class="current-user">
-    <mat-card-title>{{user.firstname}}</mat-card-title>
+    <mat-card-title>{{user.firstName}}</mat-card-title>
     <mat-card-content>
       <img class="course-thumbnail" [src]="user?.image">
+      <p>{{user.id}}</p>
       <p>{{user.city}}</p>
+      <p>{{user.country}}</p>
       <p>{{user.lastName}}</p>
       <p>{{user.email}}</p>
     </mat-card-content>

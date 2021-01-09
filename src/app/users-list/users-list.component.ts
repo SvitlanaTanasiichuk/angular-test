@@ -25,7 +25,7 @@ export class UsersListComponent implements OnInit {
   }
 
   loadAllUsers() {
-    this.users$ = this.userService.getAllUsers(80, 1)
+    this.users$ = this.userService.getAllUsers(50, 1)
       .pipe(
         map(users => users)
       );

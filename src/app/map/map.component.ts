@@ -3,6 +3,7 @@ import {UsersService} from '../services/users.service';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {CurrentUser} from '../shared/currentUser';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-map',
@@ -17,7 +18,8 @@ export class MapComponent implements OnInit {
   lng = 30.312568;
 
   constructor(
-    private userService: UsersService
+    private userService: UsersService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -30,5 +32,5 @@ export class MapComponent implements OnInit {
           map(users => users)
         );
     }
-  }
+}
 

@@ -3,17 +3,17 @@
          [longitude]="lng"
          [zoom]="zoom">
   <agm-marker *ngFor="let user of (users$ | async); let i = index"
-              [label]="user.firstname"
-              [latitude]="user.lat"
-              [longitude]="user.lon">
-
+              [label]="user.firstName"
+              [latitude]="lat"
+              [longitude]="lng">
     <agm-info-window>
       <strong>User info</strong>
       <p>{{user.id}}</p>
-      <p>{{user.firstname}}</p>
+      <p>{{user.firstName}}</p>
       <p>{{user.lastName}}</p>
       <p>{{user.city}}</p>
       <p>{{user.email}}</p>
+      <a [routerLink]="['../user/' + (i+1)]">Details</a>
     </agm-info-window>
   </agm-marker>
 </agm-map>

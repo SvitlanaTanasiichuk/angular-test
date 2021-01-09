@@ -17,7 +17,15 @@ export class UsersService {
     const url = `${environment.apiUrl}/v1/user?perPage=${perPage}&page=${page}`;
     return this.http.get<CurrentUser[]>(url)
       .pipe(
-        map(res => res['result'])
+        map((res: CurrentUser[]) => res['result'])
+      );
+  }
+
+  getUserById(id: number) {
+    const url = `${environment.apiUrl}v1/user/${id}`;
+    return this.http.get(url)
+      .pipe(
+        map((res: CurrentUser) => res['result'])
       );
   }
 }
