@@ -1,0 +1,47 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="form">
+  <h2 class="text-center">User profile</h2>
+  <div class="form-control">
+    <label for="firstName">First name</label>
+    <input id="firstName" type="firstName" formControlName="firstName">
+    <div *ngIf="form.get('firstName').touched && form.get('firstName').invalid" class="validation">
+      <small *ngIf="form.get('firstName').errors.required">Enter first name</small>
+    </div>
+  </div>
+    <div class="form-control">
+      <label for="lastName">Last name</label>
+      <input id="lastName" type="text" formControlName="lastName">
+      <div *ngIf="form.get('lastName').touched && form.get('lastName').invalid" class="validation">
+        <small *ngIf="form.get('lastName').errors.required">Enter last name</small>
+      </div>
+    </div>
+    <div class="form-control">
+      <label for="gender">Gender</label>
+      <select id="gender" type="text" formControlName="gender">
+        <option>Male</option>
+        <option>Female</option>
+      </select>
+      <div *ngIf="form.get('gender').touched && form.get('gender').invalid" class="validation">
+        <small *ngIf="form.get('gender').errors.required">Choose gender</small>
+      </div>
+    </div>
+    <div class="form-control">
+      <label for="country">Country</label>
+      <input id="country" type="text" formControlName="country">
+      <div *ngIf="form.get('country').touched && form.get('country').invalid" class="validation">
+        <small *ngIf="form.get('country').errors.required">Enter country</small>
+      </div>
+    </div>
+    <div class="form-control">
+      <label for="city">City</label>
+      <input id="city" type="text" formControlName="city">
+      <div *ngIf="form.get('city').touched && form.get('city').invalid" class="validation">
+        <small *ngIf="form.get('city').errors.required">Enter city</small>
+      </div>
+    </div>
+  <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid || submitted">Save</button>
+</form>
+
+<div class="image">
+</div>
+
+<router-outlet></router-outlet>

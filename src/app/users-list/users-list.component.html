@@ -1,0 +1,21 @@
+<div class="users">
+  <div>
+    <h3>All users</h3>
+    <div *ngFor="let user of (users$ | async)" class="current-user">
+      <pre><img class="course-thumbnail" [src]="user?.image">
+      <p>{{user.firstname}}</p>
+      <p>{{user.city}}</p>
+      <p>{{user.lastName}}</p>
+      <p>{{user.email}}</p>
+      </pre>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+

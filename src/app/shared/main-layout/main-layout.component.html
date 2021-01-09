@@ -1,0 +1,35 @@
+<nav class="navbar bg-primary">
+  <h1>
+    <a routerLink="/">Test work</a>
+  </h1>
+  <ng-container *ngIf="authService.isAuthenticated(); else login">
+  <ul>
+    <li routerLinkActive="active">
+      <a [routerLink]="['/map']">Map</a>
+    </li>
+    <li routerLinkActive="active">
+      <a [routerLink]="['/users']">Users</a>
+    </li>
+    <li routerLinkActive="active">
+      <a [routerLink]="['/profile']">Profile</a>
+    </li>
+
+    <li routerLinkActive="active">
+      <a href="#" (click)="logout($event)">Logout</a>
+    </li>
+   </ul>
+  </ng-container>
+
+  <ng-template #login>
+    <ul>
+    <li routerLinkActive="active">
+      <a [routerLink]="['/register']">Register</a>
+    </li>
+
+      <li routerLinkActive="active">
+        <a [routerLink]="['/login']">Login</a>
+      </li>
+    </ul>
+  </ng-template>
+</nav>
+<router-outlet></router-outlet>
