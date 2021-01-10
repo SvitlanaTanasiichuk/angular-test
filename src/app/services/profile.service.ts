@@ -12,7 +12,7 @@ export class ProfileService {
 
   constructor(private http: HttpClient) {}
 
-    updateProfile(body): Observable<CurrentUser>{
+    updateProfile(body): Observable<CurrentUser> {
       const url = `${environment.apiUrl}/v1/user/profile`;
       return this.http.put<CurrentUser>(url, body)
         .pipe(
@@ -22,6 +22,14 @@ export class ProfileService {
             };
           })
         );
+    }
+
+    updateProfileImage(image): Observable<CurrentUser> {
+    const url = `${environment.apiUrl}/v1/user/profile/image`;
+    return  this.http.put<CurrentUser>(url, image)
+      .pipe(
+        map(res => res)
+      );
     }
 
     addUserLocation(body): Observable<CurrentUser> {

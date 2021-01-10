@@ -20,6 +20,7 @@ import {MatCardModule} from '@angular/material/card';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SearchPipe } from './shared/pipes/search.pipe';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {QuillModule} from 'ngx-quill';
 
 @NgModule({
   declarations: [

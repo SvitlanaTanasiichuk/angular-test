@@ -13,7 +13,10 @@ import {CurrentUser} from '../shared/models/currentUser';
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   form: FormGroup;
+  imageForm: FormGroup;
   submitted: boolean;
+  image;
+  profileSub: Subscription = null;
   location$: Observable<any>;
 
   constructor(
@@ -26,6 +29,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.profileSub) {
+      this.profileSub.unsubscribe();
+    }
   }
 
   initializeForm() {
@@ -37,6 +43,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
       city: new FormControl(null, Validators.required),
       lat: new FormControl(null),
       lon: new FormControl(null),
+    });
+    this.imageForm = new FormGroup({
+      image: new FormControl(null)
     });
   }
 
@@ -53,12 +62,20 @@ export class ProfileComponent implements OnInit, OnDestroy {
     city: this.form.value.city
   };
 
-  this.profileService.updateProfile(profile)
+  this.profileSub = this.profileService.updateProfile(profile)
     .subscribe(res => {
       this.form.reset();
       this.submitted = false;
       this.router.navigate(['/map']);
     });
+  }
+
+  addPhoto() {
+    const image = {
+      image: this.imageForm.value.image
+    };
+    this.profileService.updateProfileImage(image)
+      .subscribe(res => res);
   }
 
   // private putLocation() {

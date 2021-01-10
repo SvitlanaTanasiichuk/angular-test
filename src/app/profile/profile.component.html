@@ -1,3 +1,10 @@
+<div class="flex-center">
+<form [formGroup]="imageForm" class="image-block" (ngSubmit)="addPhoto()">
+  <label for="image">Choose photo</label>
+  <input formControlName="image" id="image"></input>
+  <button type="submit" class="btn btn-primary btn-block">Save image</button>
+</form>
+
 <form [formGroup]="form" (ngSubmit)="submit()" class="form">
   <h2 class="text-center">User profile</h2>
   <div class="form-control">
@@ -51,6 +58,7 @@
 </form>
 
 <div class="image">
+</div>
 </div>
 
 <router-outlet></router-outlet>
