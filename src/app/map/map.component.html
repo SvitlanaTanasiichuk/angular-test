@@ -3,9 +3,9 @@
          [longitude]="lng"
          [zoom]="zoom">
   <agm-marker *ngFor="let user of (users$ | async); let i = index"
-              [label]="user.firstName"
-              [latitude]="lat"
-              [longitude]="lng">
+              [label]="user.id"
+              [latitude]="user.lat"
+              [longitude]="user.lon">
     <agm-info-window>
       <strong>User info</strong>
       <p>{{user.id}}</p>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {UsersService} from '../services/users.service';
+import {UsersService} from '../shared/services/users.service';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
-import {CurrentUser} from '../shared/currentUser';
+import {CurrentUser} from '../shared/models/currentUser';
 import {switchMap} from 'rxjs/operators';
 
 @Component({

@@ -1,11 +1,13 @@
+<input matInput type="text" placeholder="Search user" [(ngModel)]="userName">
 <mat-paginator [length]="100"
                [pageSize]="10"
                [pageSizeOptions]="[5, 10, 25, 100]">
 </mat-paginator>
 <div class="users">
-  <mat-card  *ngFor="let user of (users$ | async)" class="current-user">
+  <mat-card  *ngFor="let user of (users$ | async) | search : userName" class="current-user">
     <mat-card-title>{{user.firstName}}</mat-card-title>
     <mat-card-content>
+      <a [routerLink]="['../user/' + user.id]">Details</a>
       <img class="course-thumbnail" [src]="user?.image">
       <p>{{user.id}}</p>
       <p>{{user.city}}</p>

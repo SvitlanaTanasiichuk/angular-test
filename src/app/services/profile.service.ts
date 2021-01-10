@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {CurrentUser} from '../shared/currentUser';
+import {CurrentUser} from '../shared/models/currentUser';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 

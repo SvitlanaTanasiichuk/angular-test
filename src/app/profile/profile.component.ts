@@ -4,7 +4,7 @@ import {ProfileService} from '../services/profile.service';
 import {Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Observable, Subscription} from 'rxjs';
-import {CurrentUser} from '../shared/currentUser';
+import {CurrentUser} from '../shared/models/currentUser';
 
 @Component({
   selector: 'app-profile',

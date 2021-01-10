@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {UsersService} from '../services/users.service';
+import {UsersService} from '../shared/services/users.service';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {CurrentUser} from '../shared/currentUser';
+import {CurrentUser} from '../shared/models/currentUser';
 import {Router} from '@angular/router';
 
 @Component({
@@ -27,9 +27,9 @@ export class MapComponent implements OnInit {
   }
 
   getUsers() {
-      this.users$ = this.userService.getAllUsers()
+      this.users$ = this.userService.getAllUsers(50, 1)
         .pipe(
-          map(users => users)
+          map((users: CurrentUser[]) => users)
         );
     }
 }

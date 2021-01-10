@@ -18,6 +18,8 @@ import {AgmCoreModule} from '@agm/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatCardModule} from '@angular/material/card';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { SearchPipe } from './shared/pipes/search.pipe';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -28,21 +30,23 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MapComponent,
     UserComponent,
     HomeComponent,
+    SearchPipe,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AuthModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBe62-SiV5opsO8Vy6TgoR8F6jjHgaIK_o'
-    }),
-    MatPaginatorModule,
-    MatCardModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        AuthModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyBe62-SiV5opsO8Vy6TgoR8F6jjHgaIK_o'
+        }),
+        MatPaginatorModule,
+        MatCardModule,
+        MatFormFieldModule,
+    ],
   providers: [
     AuthService,
     {

@@ -3,6 +3,9 @@
     <a routerLink="/">Test work</a>
   </h1>
   <ng-container *ngIf="authService.isAuthenticated(); else login">
+<form (submit)="onSubmit($event)">
+  <input name="userName">
+</form>
   <ul>
     <li routerLinkActive="active">
       <a [routerLink]="['/map']">Map</a>

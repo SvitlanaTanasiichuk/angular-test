@@ -7,7 +7,7 @@ import {MapComponent} from './map/map.component';
 import {UserComponent} from './user/user.component';
 import {LoginComponent} from './auth/components/login/login.component';
 import {RegisterComponent} from './auth/components/register/register.component';
-import {AuthGuard} from './auth/auth.guard';
+import {AuthGuard} from './auth/services/auth.guard';
 import {HomeComponent} from './home/home.component';
 
 

@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs';
-import {CurrentUser} from '../shared/currentUser';
-import {UsersService} from '../services/users.service';
+import {CurrentUser} from '../shared/models/currentUser';
+import {UsersService} from '../shared/services/users.service';
 import {catchError, map} from 'rxjs/operators';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
@@ -15,6 +15,7 @@ export class UsersListComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   users$: Observable<CurrentUser[]>;
+  userName: any;
 
   constructor(
     private userService: UsersService) {
