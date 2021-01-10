@@ -1,10 +1,14 @@
 <div class="flex-center">
-<form [formGroup]="imageForm" class="image-block" (ngSubmit)="addPhoto()">
-  <label for="image">Choose photo</label>
-  <input formControlName="image" id="image"></input>
-  <button type="submit" class="btn btn-primary btn-block">Save image</button>
-</form>
-
+  <div class="image-block">
+  <h1>Upload file</h1>
+  <input
+    type="file"
+    style="display: none"
+    (change)="onFileSelected($event)"
+   #fileInput>
+  <button type="button" (click)="fileInput.click()">Pick File</button>
+    <button type="button" (click)="onUpload()">Submit</button>
+  </div>
 <form [formGroup]="form" (ngSubmit)="submit()" class="form">
   <h2 class="text-center">User profile</h2>
   <div class="form-control">

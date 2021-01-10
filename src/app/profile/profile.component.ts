@@ -1,10 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProfileService} from '../services/profile.service';
+import { HttpEventType} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {DomSanitizer} from '@angular/platform-browser';
-import {Observable, Subscription} from 'rxjs';
-import {CurrentUser} from '../shared/models/currentUser';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -12,12 +11,11 @@ import {CurrentUser} from '../shared/models/currentUser';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit, OnDestroy {
+  selectedFile: File = null;
   form: FormGroup;
-  imageForm: FormGroup;
   submitted: boolean;
   image;
   profileSub: Subscription = null;
-  location$: Observable<any>;
 
   constructor(
     private profileService: ProfileService,
@@ -41,11 +39,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       gender: new FormControl(null, Validators.required),
       country: new FormControl(null, Validators.required),
       city: new FormControl(null, Validators.required),
-      lat: new FormControl(null),
-      lon: new FormControl(null),
-    });
-    this.imageForm = new FormGroup({
-      image: new FormControl(null)
     });
   }
 
@@ -70,22 +63,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
   }
 
-  addPhoto() {
-    const image = {
-      image: this.imageForm.value.image
-    };
-    this.profileService.updateProfileImage(image)
-      .subscribe(res => res);
+  onFileSelected(event) {
+    this.selectedFile = <File> event.target.files[0];
+    console.log(event);
   }
 
-  // private putLocation() {
-  //   const location = {
-  //     lat: this.form.value.lat,
-  //     lon: this.form.value.lon
-  //   };
-  //   this.profileService.addUserLocation(location)
-  //     .subscribe(res => res);
-  // }
+    onUpload() {
+    const fd = new FormData();
+    fd.append('image', this.selectedFile, this.selectedFile.name);
+    this.profileService.updateProfileImage(fd, {
+      reportProgress: true,
+      observe: 'events'
+    })
+     .subscribe(res => {
+         console.log(res);
+    }
 
-
+   );
+  }
 }

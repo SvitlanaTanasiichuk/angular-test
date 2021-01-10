@@ -24,9 +24,9 @@ export class ProfileService {
         );
     }
 
-    updateProfileImage(image): Observable<CurrentUser> {
+    updateProfileImage(image, options: {}){
     const url = `${environment.apiUrl}/v1/user/profile/image`;
-    return  this.http.put<CurrentUser>(url, image)
+    return  this.http.post(url, image, options)
       .pipe(
         map(res => res)
       );
