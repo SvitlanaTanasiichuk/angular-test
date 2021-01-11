@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {UsersService} from '../shared/services/users.service';
 import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {CurrentUser} from '../shared/models/currentUser';
 import {Router} from '@angular/router';
+import {ResponseModel} from '../shared/models/responseModel';
 
 @Component({
   selector: 'app-map',
@@ -12,7 +13,8 @@ import {Router} from '@angular/router';
 })
 export class MapComponent implements OnInit {
 
-  users$: Observable<CurrentUser[]>;
+  users$: Subscription;
+  allUsers;
   zoom = 8;
   lat = 50.271678;
   lng = 30.312568;
@@ -28,8 +30,9 @@ export class MapComponent implements OnInit {
 
   getUsers() {
       this.users$ = this.userService.getAllUsers(50, 1)
-        .pipe(
-          map((users: CurrentUser[]) => users)
+        .subscribe(res => {
+            this.allUsers = res['result']
+          }
         );
     }
 }

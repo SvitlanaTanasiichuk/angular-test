@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ProfileService} from '../services/profile.service';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {UsersService} from '../shared/services/users.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   profileSub: Subscription = null;
 
   constructor(
-    private profileService: ProfileService,
+    private userService: UsersService,
     private router: Router,
   ) { }
 
@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     city: this.form.value.city
   };
 
-  this.profileSub = this.profileService.updateProfile(profile)
+  this.profileSub = this.userService.updateProfile(profile)
     .subscribe(res => {
       this.form.reset();
       this.submitted = false;
@@ -62,15 +62,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
   }
 
-  onFileSelected(event) {
-    this.selectedFile = <File> event.target.files[0];
-    console.log(event);
-  }
+    onFileSelected(event) {
+      this.selectedFile = <File> event.target.files[0];
+      console.log(event);
+    }
 
     onUpload() {
     const fd = new FormData();
     fd.append('image', this.selectedFile, this.selectedFile.name);
-    this.profileService.updateProfileImage(fd, {
+    this.userService.updateProfileImage(fd, {
       reportProgress: true,
       observe: 'events'
     })

@@ -1,18 +1,19 @@
-<input matInput type="text" placeholder="Search user" [(ngModel)]="userName">
-<mat-paginator [length]="100"
-               [pageSize]="10"
-               [pageSizeOptions]="[5, 10, 25, 100]">
+<mat-paginator [length]="resultLength"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="onPageChanged($event)"
+               showFirstLastButtons>
 </mat-paginator>
 <div class="users">
-  <mat-card  *ngFor="let user of (users$ | async) | search : userName" class="current-user" [routerLink]="['../user/' + user.id]">
-    <mat-card-title>{{user.firstName}}</mat-card-title>
+  <mat-card  *ngFor="let user of allUsers" class="current-user" [routerLink]="['../user/' + user.id]">
+    <mat-card-title>{{user?.firstName}}</mat-card-title>
     <mat-card-content>
-      <img class="course-thumbnail" [src]="user?.image">
-      <p>{{user.id}}</p>
-      <p>{{user.city}}</p>
-      <p>{{user.country}}</p>
-      <p>{{user.lastName}}</p>
-      <p>{{user.email}}</p>
+      <img [src]="user?.image">
+      <p>{{user?.id}}</p>
+      <p>{{user?.city}}</p>
+      <p>{{user?.country}}</p>
+      <p>{{user?.lastName}}</p>
+      <p>{{user?.email}}</p>
     </mat-card-content>
 </mat-card>
 </div>

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../auth/services/auth.service';
 import {Router} from '@angular/router';
-import {FormBuilder, FormGroup} from '@angular/forms';
 import {UsersService} from '../services/users.service';
-import {catchError} from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-layout',

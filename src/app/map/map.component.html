@@ -2,7 +2,7 @@
 <agm-map [latitude]="lat"
          [longitude]="lng"
          [zoom]="zoom">
-  <agm-marker *ngFor="let user of (users$ | async); let i = index"
+  <agm-marker *ngFor="let user of allUsers; let i = index"
               [label]="user.id"
               [latitude]="user.lat ? user.lat : 50.271678"
               [longitude]="user.lon ? user.lon : 30.312568">
