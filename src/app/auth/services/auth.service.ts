@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
-import {User} from '../user';
+import {catchError, map, tap} from 'rxjs/operators';
+import {AuthUser} from '../authUser';
+import {of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  register(user: User) {
+  register(user: AuthUser) {
     const url = `${environment.apiUrl}/v1/user/register`;
     return this.http.post(url, user)
       .pipe(
@@ -20,11 +20,15 @@ export class AuthService {
       );
   }
 
-  login(user: User){
+  login(user: AuthUser){
     const url = `${environment.apiUrl}/v1/user/login`;
-    return this.http.post<User>(url, user)
+    return this.http.post<AuthUser>(url, user)
       .pipe(
-        tap(this.setToken)
+        tap(this.setToken),
+        catchError(err => {
+          alert(err.error);
+          return of(false);
+        })
       );
     }
 

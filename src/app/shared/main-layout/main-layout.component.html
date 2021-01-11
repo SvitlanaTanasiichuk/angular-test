@@ -3,9 +3,13 @@
     <a routerLink="/">Test work</a>
   </h1>
   <ng-container *ngIf="authService.isAuthenticated(); else login">
-<form (submit)="onSubmit($event)">
-  <input name="userName">
+<form>
+    <mat-form-field (submit)="performSearch($event)" id="search-input" appearance="outline">
+      <input matInput #searchBar type="text" [(ngModel)]="searchValue" name="searchBar" [value]="searchValue" (keyup.enter)="performSearch($event)">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="performSearch(searchValue)" type="submit" for="searchBar">Submit</button>
 </form>
+
   <ul>
     <li routerLinkActive="active">
       <a [routerLink]="['/map']">Map</a>

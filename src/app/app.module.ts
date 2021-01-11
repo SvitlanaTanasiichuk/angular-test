@@ -15,12 +15,9 @@ import {AuthService} from './auth/services/auth.service';
 import {AuthInterceptor} from './shared/services/auth.interceptor';
 import { HomeComponent } from './home/home.component';
 import {AgmCoreModule} from '@agm/core';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatCardModule} from '@angular/material/card';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SearchPipe } from './shared/pipes/search.pipe';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {QuillModule} from 'ngx-quill';
+import {MaterialModule} from './shared/modules/material.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +28,7 @@ import {QuillModule} from 'ngx-quill';
     MapComponent,
     UserComponent,
     HomeComponent,
-    SearchPipe,
+    SearchPipe
   ],
     imports: [
         BrowserModule,
@@ -40,13 +37,11 @@ import {QuillModule} from 'ngx-quill';
         FormsModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
+        MaterialModule,
         HttpClientModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyBe62-SiV5opsO8Vy6TgoR8F6jjHgaIK_o'
-        }),
-        MatPaginatorModule,
-        MatCardModule,
-        MatFormFieldModule,
+        })
     ],
   providers: [
     AuthService,

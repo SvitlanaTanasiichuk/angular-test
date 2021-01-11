@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {Observable, throwError} from "rxjs";
-import {AuthService} from "../../auth/services/auth.service";
-import {Router} from "@angular/router";
-import {catchError} from "rxjs/operators";
+import {Injectable} from '@angular/core';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {AuthService} from '../../auth/services/auth.service';
+import {Router} from '@angular/router';
+import {catchError} from 'rxjs/operators';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
           Authorization: token ? `Bearer ${token}` : ''
         }
         }
-      )
+      );
     }
     return next.handle(req)
       .pipe(
@@ -33,6 +33,6 @@ export class AuthInterceptor implements HttpInterceptor {
           }
           return throwError(error);
         })
-      )
+      );
   }
 }

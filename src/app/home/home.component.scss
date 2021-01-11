@@ -1,0 +1,10 @@
+.wrapper {
+  display: flex;
+}
+.card {
+  background-color: var(--light-color);
+  margin: 2rem;
+  width: 200px;
+  height: 150px;
+  cursor: pointer;
+}

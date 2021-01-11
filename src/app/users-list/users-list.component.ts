@@ -3,7 +3,6 @@ import {Observable} from 'rxjs';
 import {CurrentUser} from '../shared/models/currentUser';
 import {UsersService} from '../shared/services/users.service';
 import {catchError, map} from 'rxjs/operators';
-import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
@@ -12,7 +11,6 @@ import {MatPaginator} from '@angular/material/paginator';
   styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent implements OnInit {
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   users$: Observable<CurrentUser[]>;
   userName: any;

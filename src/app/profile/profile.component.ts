@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProfileService} from '../services/profile.service';
-import { HttpEventType} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
@@ -78,7 +77,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
      .subscribe(res => {
          console.log(res);
     }
-
    );
   }
 }

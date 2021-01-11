@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../auth/services/auth.service';
 import {Router} from '@angular/router';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {UsersService} from '../services/users.service';
+import {catchError} from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-layout',
@@ -10,12 +11,11 @@ import {UsersService} from '../services/users.service';
   styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent implements OnInit {
-  userName: string;
+  searchValue: string;
 
   constructor(
     public authService: AuthService,
     private router: Router,
-    private formBuilder: FormBuilder,
     private userService: UsersService
   ) {
   }
@@ -24,12 +24,18 @@ export class MainLayoutComponent implements OnInit {
   }
 
   logout($event) {
-  event.preventDefault();
+    event.preventDefault();
     this.authService.logout();
     this.router.navigate(['/login']);
   }
 
-  onSubmit(event: any) {
-    return this.userService.getUserByParam(this.userName, '', '', '' , '', '');
+  performSearch(searchValue) {
+    this.userService.getUserByParam(searchValue, '30', '0', '0', '50', '1')
+      .subscribe(res => {
+        if (res['result[0]']) {
+          const id = res['result[0]'];
+          this.router.navigate(['/user/', id]);
+        }
+      });
   }
 }

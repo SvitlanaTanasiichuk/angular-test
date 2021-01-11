@@ -4,8 +4,8 @@
          [zoom]="zoom">
   <agm-marker *ngFor="let user of (users$ | async); let i = index"
               [label]="user.id"
-              [latitude]="user.lat"
-              [longitude]="user.lon">
+              [latitude]="user.lat ? user.lat : 50.271678"
+              [longitude]="user.lon ? user.lon : 30.312568">
     <agm-info-window>
       <strong>User info</strong>
       <p>{{user.id}}</p>
@@ -13,7 +13,7 @@
       <p>{{user.lastName}}</p>
       <p>{{user.city}}</p>
       <p>{{user.email}}</p>
-      <a [routerLink]="['../user/' + (i+1)]">Details</a>
+      <a [routerLink]="['../user/', (i+1)]">Details</a>
     </agm-info-window>
   </agm-marker>
 </agm-map>
