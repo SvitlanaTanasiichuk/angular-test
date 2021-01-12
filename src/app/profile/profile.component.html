@@ -1,5 +1,7 @@
 <div class="flex-center">
-<form [formGroup]="imgForm" (submit)="onSubmit()" class="image-block">
+
+<!--  IMAGE FORM-->
+<form [formGroup]="imgForm" (submit)="onSubmit()" class="flex-center">
   <div>
     <input (change)="onFileSelect($event)" type="file" />
   </div>
@@ -7,13 +9,17 @@
     <img [src]="imageData" [alt]="imgForm.value.name"/>
   </div>
   <div>
-    <button mat-raised-button type="submit">Add image</button>
+    <button mat-raised-button class="btn bg-primary" type="submit">Add image</button>
   </div>
 </form>
+<!--  IMAGE FORM-->
+<!--  DELETE IMAGE BUTTON-->
   <div>
-    <button mat-raised-button (click)="deleteImage()">Delete image</button>
+    <button mat-raised-button class="btn btn-primary" (click)="deleteImage()">Delete image</button>
   </div>
-<form [formGroup]="form" (ngSubmit)="submit()" class="form">
+ <!--DELETE IMAGE BUTTON-->
+<!--  FORM WITH USER INFO -->
+<form [formGroup]="form" *ngIf="form" (ngSubmit)="submit()" class="form">
   <h2 class="text-center">User profile</h2>
   <div class="form-control">
     <label for="firstName">First name</label>
@@ -55,9 +61,7 @@
     </div>
   <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid || submitted">Save</button>
 </form>
-
-<div class="image">
-</div>
+  <!--  FORM WITH USER INFO -->
 </div>
 
 <router-outlet></router-outlet>

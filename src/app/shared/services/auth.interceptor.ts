@@ -10,7 +10,9 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+  }
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -18,15 +20,16 @@ export class AuthInterceptor implements HttpInterceptor {
     if (this.authService.isAuthenticated()) {
       const token = this.authService.token;
       req = req.clone({
-        setHeaders: {
-          Authorization: token ? `Bearer ${token}` : ''
-        }
+          setHeaders: {
+            Authorization: token ? `Bearer ${token}` : ''
+          }
         }
       );
     }
+
     return next.handle(req)
       .pipe(
-        catchError( error => {
+        catchError(error => {
           if (error.status === 401) {
             this.authService.logout();
             this.router.navigate(['/login']);

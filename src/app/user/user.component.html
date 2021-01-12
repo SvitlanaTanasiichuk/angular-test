@@ -1,15 +1,15 @@
 <div *ngIf="user$ | async as user">
-<mat-card>
+<mat-card class="user-card">
   <mat-card-actions>
     <mat-button class="btn btn-primary" routerLink="/users">Back</mat-button>
   </mat-card-actions>
-  <mat-card-title>User {{user.firstName}}{{user.lastName}}</mat-card-title>
+  <mat-card-title>User {{user.firstName}}&nbsp;{{user.lastName}}</mat-card-title>
   <mat-card-content>
-    <p>{{user.id}}</p>
-    <p>{{user.country}}</p>
-    <p>{{user.city}}</p>
-    <p>{{user.email}}</p>
-    <img src="{{user.image}}" class="flex-center">
+    <p>Id: {{user.id}}</p>
+    <p>Country: {{user.country}}</p>
+    <p>City:{{user.city}}</p>
+    <p>Email:{{user.email}}</p>
+    <img src="{{user.image}}" class="img">
   </mat-card-content>
   </mat-card>
 </div>

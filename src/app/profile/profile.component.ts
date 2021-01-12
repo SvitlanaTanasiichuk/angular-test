@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
 import {ProfileService} from './services/profile.service';
@@ -24,12 +23,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private profileService: ProfileService,
-    private userService: UsersService,
-    private router: Router,
+    private userService: UsersService
   ) { }
 
   ngOnInit(): void {
-    // this.initializeForm();
     this.initializeImageForm();
     this.getCurrentUser();
   }
@@ -40,16 +37,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  // initializeForm() {
-  //   this.form = new FormGroup({
-  //     firstName: new FormControl(null, Validators.required),
-  //     lastName: new FormControl(null, Validators.required),
-  //     gender: new FormControl(null, Validators.required),
-  //     country: new FormControl(null, Validators.required),
-  //     city: new FormControl(null, Validators.required),
-  //   });
-  // }
-
+  // Initialize component with params
   private getCurrentUser() {
     this.userSubscription = this.userService.getCurrentUser()
       .subscribe(user => {
@@ -64,6 +52,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       });
   }
 
+  // On submitting the form with user info
   submit() {
   if (this.form.invalid) {
     return;
@@ -80,10 +69,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     .subscribe(res => {
       this.form.reset();
       this.submitted = false;
-      // this.router.navigate(['/map']);
     });
   }
 
+  // Initialize form with image
   private initializeImageForm() {
     this.imgForm = new FormGroup({
       image: new FormControl(null)
@@ -91,6 +80,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
 
+  // On upload the image
   onFileSelect(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.imgForm.patchValue({image: file});
@@ -104,12 +94,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
   }
 
+  // When image already upload submitting the form
   onSubmit() {
     this.profileService.updateProfileImage(this.imgForm.value.image);
     this.imgForm.reset();
     this.imageData = null;
   }
 
+  // When  deleting the image
   deleteImage() {
     this.profileService.deleteProfileImage()
       .subscribe(res => res);

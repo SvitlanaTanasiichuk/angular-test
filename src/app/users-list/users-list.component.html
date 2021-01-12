@@ -1,14 +1,14 @@
 <div>
-  <mat-paginator [length]="resultLength"
+  <mat-paginator
+                [length]="resultLength"
                [pageSize]="pageSize"
-               [pageSizeOptions]="pageSizeOptions"
                (page)="onPageChanged($event)"
                showFirstLastButtons>
 </mat-paginator>
 </div>
 <div class="users" *ngIf="allUsers">
   <mat-card  *ngFor="let user of allUsers" class="current-user" [routerLink]="['../user/' + user.id]">
-    <mat-card-title>{{user.firstName}}</mat-card-title>
+    <mat-card-title>{{user?.firstName}}</mat-card-title>
     <mat-card-content>
       <img [src]="user.image">
       <p>{{user?.id}}</p>

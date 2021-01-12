@@ -4,7 +4,6 @@ import {Router} from '@angular/router';
 
 import {AuthService} from '../../services/auth.service';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,6 +23,7 @@ export class LoginComponent implements OnInit {
     this.initializeForm();
   }
 
+  // On submitting the login form
   onSubmit(): void {
     if (this.form.invalid) {
       return;
@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
       email: this.form.value.email,
       password: this.form.value.password
     };
-
     this.authService.login(user).subscribe(res => {
       this.form.reset();
       this.router.navigate(['/profile']);

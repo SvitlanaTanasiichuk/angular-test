@@ -17,7 +17,6 @@ export class UsersListComponent implements OnInit, OnDestroy {
   allUsers: CurrentUser | null;
   pageSize = 50;
   pageIndex = 1;
-  pageSizeOptions: number[] = [20, 40, 60];
   resultLength: number = null;
 
   constructor(private userService: UsersService) {
@@ -27,6 +26,13 @@ export class UsersListComponent implements OnInit, OnDestroy {
     this.loadAllUsers();
   }
 
+  ngOnDestroy(): void {
+    if (this.usersSub) {
+      this.usersSub.unsubscribe();
+    }
+  }
+
+  // Get value from paginator
   onPageChanged(event: PageEvent) {
     this.resultLength = event.length;
     this.pageIndex = event.pageIndex + 1;
@@ -34,12 +40,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
     this.loadAllUsers();
   }
 
-  ngOnDestroy(): void {
-    if (this.usersSub) {
-      this.usersSub.unsubscribe();
-    }
-  }
-
+  // Subscription to load all users
   loadAllUsers() {
     this.usersSub = this.userService.getAllUsers(this.pageSize, this.pageIndex)
       .subscribe( res => {

@@ -1,9 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {Router} from '@angular/router';
 
 import {UsersService} from '../shared/services/users.service';
-
 
 @Component({
   selector: 'app-map',
@@ -32,6 +30,7 @@ export class MapComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Subscription to get all user on the map
   getUsers() {
       this.usersSub = this.userService.getAllUsers(50, 1)
         .subscribe(res => {

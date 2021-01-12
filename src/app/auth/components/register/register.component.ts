@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 
@@ -31,18 +32,17 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  // On submitting the register form
   onSubmit(): void {
     console.log('submit', this.form.value, this.form.valid);
     if (this.form.invalid) {
       return;
     }
     this.submitted = true;
-
     const user = {
       email: this.form.value.email,
       password: this.form.value.password
     };
-
     this.authService.register(user).subscribe(res => {
       this.form.reset();
       this.router.navigate(['/profile']);

@@ -10,11 +10,9 @@ import {UsersService} from '../services/users.service';
 })
 export class MainLayoutComponent implements OnInit {
   searchValue: string;
-  radius: 30;
-  lat: number;
-  lon: number;
-  perPage: number;
-  page: number;
+  radius = 30;
+  lat = 50.271678;
+  lng = 30.312568;
 
   constructor(
     public authService: AuthService,
@@ -33,10 +31,10 @@ export class MainLayoutComponent implements OnInit {
   }
 
   performSearch(searchValue) {
-    this.userService.getUserByParam(searchValue, this.radius, this.lat, this.lon, 50, 1)
-      .subscribe(res => {
-        if (res['result[0]']) {
-          const id = res['result[0]'];
+    this.userService.getUserByParam(searchValue, this.radius, this.lat, this.lng, 50, 1)
+      .subscribe((res: any) => {
+        if (res) {
+          const id = res.result[0].id;
           this.router.navigate(['/user/', id]);
         }
       });
