@@ -1,6 +1,6 @@
 <nav class="navbar bg-primary">
   <h1>
-    <a routerLink="/">Test work</a>
+    <a [routerLink]="['/home']">Test work</a>
   </h1>
   <ng-container *ngIf="authService.isAuthenticated(); else login">
 <form>
@@ -32,7 +32,6 @@
     <li routerLinkActive="active">
       <a [routerLink]="['/register']">Register</a>
     </li>
-
       <li routerLinkActive="active">
         <a [routerLink]="['/login']">Login</a>
       </li>

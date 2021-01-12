@@ -1,13 +1,17 @@
 <div class="flex-center">
-  <div class="image-block">
-  <h1>Upload file</h1>
-  <input
-    type="file"
-    style="display: none"
-    (change)="onFileSelected($event)"
-   #fileInput>
-  <button type="button" (click)="fileInput.click()">Pick File</button>
-    <button type="button" (click)="onUpload()">Submit</button>
+<form [formGroup]="imgForm" (submit)="onSubmit()" class="image-block">
+  <div>
+    <input (change)="onFileSelect($event)" type="file" />
+  </div>
+  <div *ngIf="imageData">
+    <img [src]="imageData" [alt]="imgForm.value.name"/>
+  </div>
+  <div>
+    <button mat-raised-button type="submit">Add image</button>
+  </div>
+</form>
+  <div>
+    <button mat-raised-button (click)="deleteImage()">Delete image</button>
   </div>
 <form [formGroup]="form" (ngSubmit)="submit()" class="form">
   <h2 class="text-center">User profile</h2>
@@ -49,15 +53,6 @@
         <small *ngIf="form.get('city').errors.required">Enter city</small>
       </div>
     </div>
-<!--  <div class="form-control">-->
-<!--    <label for="lat">Latitude</label>-->
-<!--    <input id="lat" type="text" formControlName="lat">-->
-<!--  </div>-->
-<!--  <div class="form-control">-->
-<!--    <label for="lon">Longitude</label>-->
-<!--    <input id="lon" type="text" formControlName="lon">-->
-<!--  </div>-->
-
   <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid || submitted">Save</button>
 </form>
 

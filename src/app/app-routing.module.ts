@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import {MainLayoutComponent} from './shared/main-layout/main-layout.component';
 import {ProfileComponent} from './profile/profile.component';
 import {UsersListComponent} from './users-list/users-list.component';
@@ -15,7 +16,7 @@ const routes: Routes = [
   {
     path: '', component: MainLayoutComponent, children: [
       {path: '', redirectTo: '/', pathMatch: 'full'},
-      {path: '', component: HomeComponent},
+      {path: 'home', component: HomeComponent},
       {path: 'users', component: UsersListComponent, canActivate: [AuthGuard]},
       {path: 'map', component: MapComponent, canActivate: [AuthGuard]},
       {path: 'user/:id', component: UserComponent, canActivate: [AuthGuard]},

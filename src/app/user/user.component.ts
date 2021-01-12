@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {UsersService} from '../shared/services/users.service';
+import {switchMap} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
+
+import {UsersService} from '../shared/services/users.service';
 import {CurrentUser} from '../shared/models/currentUser';
-import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-user',

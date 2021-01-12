@@ -4,8 +4,8 @@
          [zoom]="zoom">
   <agm-marker *ngFor="let user of allUsers; let i = index"
               [label]="user.id"
-              [latitude]="user.lat ? user.lat : 50.271678"
-              [longitude]="user.lon ? user.lon : 30.312568">
+              [latitude]="user?.lat"
+              [longitude]="user?.lon">
     <agm-info-window>
       <strong>User info</strong>
       <p>{{user.id}}</p>

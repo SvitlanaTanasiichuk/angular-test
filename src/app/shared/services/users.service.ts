@@ -30,6 +30,10 @@ export class UsersService{
     return throwError('Something bad happened; please try again later.');
   }
 
+
+  /**
+   *  GET method for getting all users
+   */
   getAllUsers(perPage?: number, page?: number): Observable<ResponseModel> {
     return this.http.get<ResponseModel>(`${url}?perPage=${perPage}&page=${page}`)
       .pipe(
@@ -38,6 +42,9 @@ export class UsersService{
       );
   }
 
+  /**
+   *  GET method for getting single user by ID
+   */
   getUserById(id: number) {
     return this.http.get(`${url}/${id}`)
       .pipe(
@@ -46,7 +53,11 @@ export class UsersService{
       );
   }
 
-  getUserByParam(searchString: string | null, radius: string, lat: string, lon: string, perPage: string, page: string) {
+
+  /**
+   *  GET method for getting ingle user by PARAM
+   */
+  getUserByParam(searchString: string | null, radius: number, lat: number, lon: number, perPage: number, page: number) {
     const currentUrl = `${url}/search?searchString=${searchString}&radius=${radius}&lat=${lat}&lon=${lon}&perPage=${perPage}&page=${page}`;
     return this.http.get(currentUrl)
       .pipe(
@@ -55,35 +66,6 @@ export class UsersService{
             ...res
           };
         }),
-        catchError(this.handleError)
-      );
-  }
-
-  updateProfile(body): Observable<CurrentUser> {
-    return this.http.put<CurrentUser>(`${url}/profile`, body)
-      .pipe(
-        map((result: CurrentUser) => {
-            return {
-              ...body
-            };
-          }
-        ),
-        catchError(this.handleError)
-      );
-  }
-
-  updateProfileImage(image, options: {}){
-    return  this.http.post(`${url}/profile/image`, image, options)
-      .pipe(
-        map(res => res),
-        catchError(this.handleError)
-      );
-  }
-
-  addUserLocation(body): Observable<CurrentUser> {
-    return this.http.put(`${url}/location`, body)
-      .pipe(
-        map(res => res['result']),
         catchError(this.handleError)
       );
   }

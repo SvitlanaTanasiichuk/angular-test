@@ -18,6 +18,7 @@ import {AgmCoreModule} from '@agm/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SearchPipe } from './shared/pipes/search.pipe';
 import {MaterialModule} from './shared/modules/material.module';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -30,19 +31,20 @@ import {MaterialModule} from './shared/modules/material.module';
     HomeComponent,
     SearchPipe
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        AuthModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MaterialModule,
-        HttpClientModule,
-        AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyBe62-SiV5opsO8Vy6TgoR8F6jjHgaIK_o'
-        })
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AuthModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBe62-SiV5opsO8Vy6TgoR8F6jjHgaIK_o'
+    }),
+    MatButtonModule
+  ],
   providers: [
     AuthService,
     {

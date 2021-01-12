@@ -1,10 +1,9 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {Subscription} from 'rxjs';
+
 import {CurrentUser} from '../shared/models/currentUser';
 import {UsersService} from '../shared/services/users.service';
-import {catchError, map} from 'rxjs/operators';
-import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import {ResponseModel} from '../shared/models/responseModel';
 
 @Component({
   selector: 'app-users-list',
@@ -17,7 +16,8 @@ export class UsersListComponent implements OnInit, OnDestroy {
   usersSub: Subscription;
   allUsers: CurrentUser | null;
   pageSize = 50;
-  pageSizeOptions: number[] = [25, 50, 100];
+  pageIndex = 1;
+  pageSizeOptions: number[] = [20, 40, 60];
   resultLength: number = null;
 
   constructor(private userService: UsersService) {
@@ -28,7 +28,10 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   onPageChanged(event: PageEvent) {
-    console.log(this.resultLength);
+    this.resultLength = event.length;
+    this.pageIndex = event.pageIndex + 1;
+    this.pageSize = event.pageSize;
+    this.loadAllUsers();
   }
 
   ngOnDestroy(): void {
@@ -38,7 +41,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   loadAllUsers() {
-    this.usersSub = this.userService.getAllUsers(this.pageSize, 1)
+    this.usersSub = this.userService.getAllUsers(this.pageSize, this.pageIndex)
       .subscribe( res => {
           this.allUsers = res['result'];
           this.resultLength = res._meta.pagination.totalCount;
