@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../auth/services/auth.service';
 import {Router} from '@angular/router';
 import {UsersService} from '../services/users.service';
-import {FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-main-layout',

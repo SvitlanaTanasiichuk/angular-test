@@ -53,6 +53,17 @@ export class UsersService{
       );
   }
 
+  /**
+   *  GET method for getting current user
+   */
+  getCurrentUser() {
+    return this.http.get(`${url}/current?expand=expand`)
+      .pipe(
+        map((res: CurrentUser) => res['result']),
+        catchError(this.handleError)
+      );
+  }
+
 
   /**
    *  GET method for getting ingle user by PARAM

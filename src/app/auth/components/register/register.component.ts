@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -41,17 +41,14 @@ export class RegisterComponent implements OnInit {
     const user = {
       email: this.form.value.email,
       password: this.form.value.password
-    }
+    };
 
     this.authService.register(user).subscribe(res => {
-      console.log(res)
-      this.form.reset()
-      this.router.navigate(['/']);
+      this.form.reset();
+      this.router.navigate(['/profile']);
       this.submitted = false;
     }, () => {
       this.submitted = false;
-    })
-
-
+    });
   }
 }

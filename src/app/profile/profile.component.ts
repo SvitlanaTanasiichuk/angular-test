@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
 import {ProfileService} from './services/profile.service';
+import {UsersService} from '../shared/services/users.service';
+import {CurrentUser} from '../shared/models/currentUser';
 
 @Component({
   selector: 'app-profile',
@@ -12,20 +14,24 @@ import {ProfileService} from './services/profile.service';
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   selectedFile: File = null;
+  user: CurrentUser;
   imageData: string;
   imgForm: FormGroup;
   form: FormGroup;
   submitted: boolean;
   profileSub: Subscription = null;
+  userSubscription: Subscription = null;
 
   constructor(
     private profileService: ProfileService,
+    private userService: UsersService,
     private router: Router,
   ) { }
 
   ngOnInit(): void {
-    this.initializeForm();
+    // this.initializeForm();
     this.initializeImageForm();
+    this.getCurrentUser();
   }
 
   ngOnDestroy(): void {
@@ -34,14 +40,28 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  initializeForm() {
-    this.form = new FormGroup({
-      firstName: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, Validators.required),
-      gender: new FormControl(null, Validators.required),
-      country: new FormControl(null, Validators.required),
-      city: new FormControl(null, Validators.required),
-    });
+  // initializeForm() {
+  //   this.form = new FormGroup({
+  //     firstName: new FormControl(null, Validators.required),
+  //     lastName: new FormControl(null, Validators.required),
+  //     gender: new FormControl(null, Validators.required),
+  //     country: new FormControl(null, Validators.required),
+  //     city: new FormControl(null, Validators.required),
+  //   });
+  // }
+
+  private getCurrentUser() {
+    this.userSubscription = this.userService.getCurrentUser()
+      .subscribe(user => {
+        this.user = user;
+        this.form = new FormGroup({
+          firstName: new FormControl(this.user.firstName, Validators.required),
+          lastName: new FormControl(this.user.lastName, Validators.required),
+          gender: new FormControl(this.user.gender, Validators.required),
+          country: new FormControl(this.user.country, Validators.required),
+          city: new FormControl(this.user.city, Validators.required),
+        });
+      });
   }
 
   submit() {
@@ -56,12 +76,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     country: this.form.value.country,
     city: this.form.value.city
   };
-
   this.profileSub = this.profileService.updateProfile(profile)
     .subscribe(res => {
       this.form.reset();
       this.submitted = false;
-      this.router.navigate(['/map']);
+      // this.router.navigate(['/map']);
     });
   }
 
@@ -86,13 +105,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-  this.profileService.updateProfileImage(this.imgForm.value.image);
-  this.imgForm.reset();
-  this.imageData = null;
+    this.profileService.updateProfileImage(this.imgForm.value.image);
+    this.imgForm.reset();
+    this.imageData = null;
   }
 
   deleteImage() {
     this.profileService.deleteProfileImage()
       .subscribe(res => res);
   }
+
 }
