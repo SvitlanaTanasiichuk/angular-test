@@ -25,7 +25,6 @@ export class RegisterComponent implements OnInit {
   }
 
   initializeForm(): void {
-    console.log('initializeForm');
     this.form = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -34,7 +33,6 @@ export class RegisterComponent implements OnInit {
 
   // On submitting the register form
   onSubmit(): void {
-    console.log('submit', this.form.value, this.form.valid);
     if (this.form.invalid) {
       return;
     }

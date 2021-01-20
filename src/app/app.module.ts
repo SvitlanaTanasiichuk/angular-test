@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
-import { ProfileComponent } from './profile/profile.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { MapComponent } from './map/map.component';
 import { UserComponent } from './user/user.component';
@@ -19,12 +18,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SearchPipe } from './shared/pipes/search.pipe';
 import {MaterialModule} from './shared/modules/material.module';
 import {MatButtonModule} from '@angular/material/button';
+import { environment } from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     MainLayoutComponent,
-    ProfileComponent,
     UsersListComponent,
     MapComponent,
     UserComponent,
@@ -41,7 +41,7 @@ import {MatButtonModule} from '@angular/material/button';
     MaterialModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBe62-SiV5opsO8Vy6TgoR8F6jjHgaIK_o'
+      apiKey: environment.googleMapApiKey
     }),
     MatButtonModule
   ],

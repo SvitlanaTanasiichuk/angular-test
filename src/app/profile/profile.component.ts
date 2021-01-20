@@ -98,7 +98,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.profileService.updateProfileImage(this.imgForm.value.image);
     this.imgForm.reset();
-    this.imageData = null;
+    // this.imageData = null;
   }
 
   // When  deleting the image

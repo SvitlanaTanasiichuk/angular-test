@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://test-api.ci.gbksoft.net/rest'
+  apiUrl: 'https://test-api.ci.gbksoft.net/rest',
+  googleMapApiKey: 'AIzaSyBe62-SiV5opsO8Vy6TgoR8F6jjHgaIK_o'
 };
 
 /*
