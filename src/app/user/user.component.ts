@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import {switchMap} from 'rxjs/operators';
-import {ActivatedRoute} from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import {Observable} from 'rxjs';
 
-import {UsersService} from '../shared/services/users.service';
-import {CurrentUser} from '../shared/models/currentUser';
+import { UsersService } from '../shared/services/users.service';
+import { CurrentUser } from '../shared/models/currentUser';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  styleUrls: ['./user.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserComponent implements OnInit {
   user$: Observable<CurrentUser>;

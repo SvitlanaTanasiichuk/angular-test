@@ -16,12 +16,17 @@ const routes: Routes = [
     path: '', component: HomeComponent, children: [
       {path: '', redirectTo: '/', pathMatch: 'full'},
       {path: 'users', component: UsersListComponent, canActivate: [AuthGuard]},
-      {path: 'map', component: MapComponent, canActivate: [AuthGuard]},
+      {
+        path: 'map',
+       canActivate: [AuthGuard],
+       loadChildren: () => import('./map/modules/map.module').then(m => m.MapModule)
+      },
       {path: 'user/:id', component: UserComponent, canActivate: [AuthGuard]},
       {
         path: 'profile',
         canActivate: [AuthGuard],
-        loadChildren: () => import('./profile/modules/profile.module').then(m => m.ProfileModule)},
+        loadChildren: () => import('./profile/modules/profile.module').then(m => m.ProfileModule)
+      },
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
     ]

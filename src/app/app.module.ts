@@ -5,20 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
 import { UsersListComponent } from './users-list/users-list.component';
-import { MapComponent } from './map/map.component';
 import { UserComponent } from './user/user.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AuthModule} from './auth/auth.module';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {AuthService} from './auth/services/auth.service';
-import {AuthInterceptor} from './shared/services/auth.interceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthModule } from './auth/auth.module';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthService } from './auth/services/auth.service';
+import { AuthInterceptor } from './shared/services/auth.interceptor';
 import { HomeComponent } from './home/home.component';
-import {AgmCoreModule} from '@agm/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchPipe } from './shared/pipes/search.pipe';
-import {MaterialModule} from './shared/modules/material.module';
-import {MatButtonModule} from '@angular/material/button';
-import { environment } from 'src/environments/environment';
+import { MaterialModule } from './shared/modules/material.module';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -26,7 +23,6 @@ import { environment } from 'src/environments/environment';
     AppComponent,
     MainLayoutComponent,
     UsersListComponent,
-    MapComponent,
     UserComponent,
     HomeComponent,
     SearchPipe
@@ -40,9 +36,6 @@ import { environment } from 'src/environments/environment';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    AgmCoreModule.forRoot({
-      apiKey: environment.googleMapApiKey
-    }),
     MatButtonModule
   ],
   providers: [
