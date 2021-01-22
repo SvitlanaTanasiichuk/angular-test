@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ResponseModel } from '../../shared/models/responseModel';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { CurrentUser } from '../shared/models/currentUser';
-import { UsersService } from '../shared/services/users.service';
+import { UsersService } from '../../shared/services/users.service';
 
 @Component({
   selector: 'app-users-list',
@@ -11,11 +11,10 @@ import { UsersService } from '../shared/services/users.service';
   styleUrls: ['./users-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UsersListComponent implements OnInit, OnDestroy {
+export class UsersListComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  usersSub: Subscription;
-  allUsers: CurrentUser | null;
+  users$: Observable<ResponseModel>;
   pageSize = 50;
   pageIndex = 1;
   resultLength: number = null;
@@ -25,12 +24,6 @@ export class UsersListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadAllUsers();
-  }
-
-  ngOnDestroy(): void {
-    if (this.usersSub) {
-      this.usersSub.unsubscribe();
-    }
   }
 
   // Get value from paginator
@@ -43,10 +36,6 @@ export class UsersListComponent implements OnInit, OnDestroy {
 
   // Subscription to load all users
   loadAllUsers() {
-    this.usersSub = this.userService.getAllUsers(this.pageSize, this.pageIndex)
-      .subscribe( res => {
-          this.allUsers = res['result'];
-          this.resultLength = res._meta.pagination.totalCount;
-        });
+     this.users$ = this.userService.getAllUsers(this.pageSize, this.pageIndex);
       }
 }

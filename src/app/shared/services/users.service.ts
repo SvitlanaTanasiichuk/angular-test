@@ -1,3 +1,4 @@
+import { SearchUserContext } from './../models/searchUserContext';
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
@@ -64,13 +65,12 @@ export class UsersService{
       );
   }
 
-
   /**
    *  GET method for getting ingle user by PARAM
    */
-  getUserByParam(searchString: string | null, radius: number, lat: number, lon: number, perPage: number, page: number) {
-    const currentUrl = `${url}/search?searchString=${searchString}&radius=${radius}&lat=${lat}&lon=${lon}&perPage=${perPage}&page=${page}`;
-    return this.http.get(currentUrl)
+  getUserByParam(context: Partial<SearchUserContext>) {
+    // const currentUrl = `${url}/search?searchString=${searchString}&radius=${radius}&lat=${lat}&lon=${lon}&perPage=${perPage}&page=${page}`;
+    return this.http.get(`${url}/search`, {params: {}})
       .pipe(
         map((res: CurrentUser[]) => {
           return {

@@ -30,13 +30,21 @@ export class MainLayoutComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  performSearch(searchValue) {
-    this.userService.getUserByParam(searchValue, this.radius, this.lat, this.lng, 50, 1)
-      .subscribe((res: any) => {
-        if (res) {
-          const id = res.result[0].id;
-          this.router.navigate(['/user/', id]);
-        }
-      });
-  }
+  // performSearch(context) {
+  //   const params = {
+  //     searchString: this.searchValue,
+  //     radius: this.radius,
+  //     lat: this.lat,
+  //     lon: this.lng,
+  //     perPage: 50,
+  //     page: 1
+  //   }
+  //   this.userService.getUserByParam(params)
+  //     .subscribe((res: any) => {
+  //       if (res) {
+  //         const id = res.result[0].id;
+  //         this.router.navigate(['/user/', id]);
+  //       }
+  //     });
+  // }
 }

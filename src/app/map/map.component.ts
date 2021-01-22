@@ -1,5 +1,6 @@
+import { ResponseModel } from './../shared/models/responseModel';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 import { UsersService } from '../shared/services/users.service';
 
@@ -9,10 +10,11 @@ import { UsersService } from '../shared/services/users.service';
   styleUrls: ['./map.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MapComponent implements OnInit, OnDestroy {
+export class MapComponent implements OnInit {
 
-  usersSub: Subscription;
-  allUsers;
+  users$: Observable<ResponseModel>;
+  pageSize: 50;
+  pageIndex: 1
   zoom = 8;
   lat = 50.271678;
   lng = 30.312568;
@@ -25,19 +27,9 @@ export class MapComponent implements OnInit, OnDestroy {
     this.getUsers();
   }
 
-  ngOnDestroy() {
-    if (this.usersSub) {
-      this.usersSub.unsubscribe();
-    }
-  }
-
   // Subscription to get all user on the map
   getUsers() {
-      this.usersSub = this.userService.getAllUsers(50, 1)
-        .subscribe(res => {
-            this.allUsers = res['result']
-          }
-        );
+    this.users$  = this.userService.getAllUsers(this.pageSize, this.pageIndex)
     }
 }
 

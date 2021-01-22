@@ -3,8 +3,8 @@ import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import {Observable} from 'rxjs';
 
-import { UsersService } from '../shared/services/users.service';
-import { CurrentUser } from '../shared/models/currentUser';
+import { UsersService } from '../../shared/services/users.service';
+import { CurrentUser } from '../../shared/models/currentUser';
 
 @Component({
   selector: 'app-user',

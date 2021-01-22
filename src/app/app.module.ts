@@ -4,8 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
-import { UsersListComponent } from './users-list/users-list.component';
-import { UserComponent } from './user/user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -22,8 +20,6 @@ import { MatButtonModule } from '@angular/material/button';
   declarations: [
     AppComponent,
     MainLayoutComponent,
-    UsersListComponent,
-    UserComponent,
     HomeComponent,
     SearchPipe
   ],
