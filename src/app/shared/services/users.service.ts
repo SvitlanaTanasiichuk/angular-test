@@ -1,21 +1,20 @@
-import { SearchUserContext } from './../models/searchUserContext';
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {CurrentUser} from '../models/currentUser';
-import {environment} from '../../../environments/environment';
-import {catchError, map} from 'rxjs/operators';
-import {ResponseModel} from '../models/responseModel';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { CurrentUser } from '../models/currentUser';
+import { environment } from '../../../environments/environment';
+import { catchError, map } from 'rxjs/operators';
+import { ResponseModel } from '../models/responseModel';
 
 const url = `${environment.apiUrl}/v1/user`;
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService{
+export class UsersService {
   readonly headers;
 
- constructor(public http: HttpClient) {
+ protected constructor(public http: HttpClient) {
    this.headers = new HttpHeaders().set('Content-Type', 'application/json');
   }
   /**
@@ -35,8 +34,10 @@ export class UsersService{
   /**
    *  GET method for getting all users
    */
-  getAllUsers(perPage?: number, page?: number): Observable<ResponseModel> {
-    return this.http.get<ResponseModel>(`${url}?perPage=${perPage}&page=${page}`)
+  public getAllUsers(perPage?: number, page?: number): Observable<ResponseModel> {
+    return this.http.get<ResponseModel>(`${url}?perPage=${perPage}&page=${page}`,
+    {headers: this.headers}
+    )
       .pipe(
         map((res: ResponseModel) => res),
         catchError(this.handleError)
@@ -46,8 +47,10 @@ export class UsersService{
   /**
    *  GET method for getting single user by ID
    */
-  getUserById(id: number) {
-    return this.http.get(`${url}/${id}`)
+  public getUserById(id: number) {
+    return this.http.get<CurrentUser>(`${url}/${id}`,
+    {headers: this.headers}
+    )
       .pipe(
         map((res: CurrentUser) => res['result']),
         catchError(this.handleError)
@@ -57,8 +60,9 @@ export class UsersService{
   /**
    *  GET method for getting current user
    */
-  getCurrentUser() {
-    return this.http.get(`${url}/current?expand=expand`)
+  public getCurrentUser() {
+    return this.http.get<CurrentUser>(`${url}/current?expand=expand`,
+    {headers: this.headers})
       .pipe(
         map((res: CurrentUser) => res['result']),
         catchError(this.handleError)
@@ -66,17 +70,14 @@ export class UsersService{
   }
 
   /**
-   *  GET method for getting ingle user by PARAM
+   *  GET method for getting single user by PARAM
    */
-  getUserByParam(context: Partial<SearchUserContext>) {
-    // const currentUrl = `${url}/search?searchString=${searchString}&radius=${radius}&lat=${lat}&lon=${lon}&perPage=${perPage}&page=${page}`;
-    return this.http.get(`${url}/search`, {params: {}})
+  public getUserByParam(context) {
+    return this.http.get(`${url}/search`, {
+      params: context
+    })
       .pipe(
-        map((res: CurrentUser[]) => {
-          return {
-            ...res
-          };
-        }),
+        map((res: CurrentUser) => res),
         catchError(this.handleError)
       );
   }

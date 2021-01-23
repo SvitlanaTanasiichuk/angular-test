@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
@@ -10,7 +11,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
+
+  registerSubscription: Subscription = null;
   form: FormGroup;
   submitted = false;
 
@@ -23,6 +26,12 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
+  }
+
+  ngOnDestroy(): void {
+    if (this.registerSubscription) {
+      this.registerSubscription.unsubscribe();
+    }
   }
 
   initializeForm(): void {
@@ -42,7 +51,7 @@ export class RegisterComponent implements OnInit {
       email: this.form.value.email,
       password: this.form.value.password
     };
-    this.authService.register(user).subscribe(res => {
+    this.registerSubscription = this.authService.register(user).subscribe(res => {
       this.form.reset();
       this.router.navigate(['/profile']);
       this.submitted = false;

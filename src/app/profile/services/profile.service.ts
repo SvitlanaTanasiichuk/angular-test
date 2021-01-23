@@ -61,7 +61,7 @@ export class ProfileService {
    * PUT method for updating the profile location
    */
   addUserLocation(body): Observable<CurrentUser> {
-    return this.http.put(`${url}/location`, body)
+    return this.http.put<CurrentUser>(`${url}/location`, body)
       .pipe(
         map(res => res['result']),
         catchError(this.userService.handleError)

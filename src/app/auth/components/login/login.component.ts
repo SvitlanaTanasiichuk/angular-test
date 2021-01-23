@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -10,7 +11,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+
+  loginSubscription: Subscription = null;
   form: FormGroup;
   submitted = false;
 
@@ -24,6 +27,12 @@ export class LoginComponent implements OnInit {
     this.initializeForm();
   }
 
+  ngOnDestroy(): void {
+    if (this.loginSubscription) {
+      this.loginSubscription.unsubscribe();
+    }
+  }
+
   // On submitting the login form
   onSubmit(): void {
     if (this.form.invalid) {
@@ -34,7 +43,7 @@ export class LoginComponent implements OnInit {
       email: this.form.value.email,
       password: this.form.value.password
     };
-    this.authService.login(user).subscribe(res => {
+    this.loginSubscription = this.authService.login(user).subscribe(res => {
       this.form.reset();
       this.router.navigate(['/profile']);
       this.submitted = false;

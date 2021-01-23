@@ -1,6 +1,6 @@
 import { ResponseModel } from './../shared/models/responseModel';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { UsersService } from '../shared/services/users.service';
 
@@ -13,8 +13,8 @@ import { UsersService } from '../shared/services/users.service';
 export class MapComponent implements OnInit {
 
   users$: Observable<ResponseModel>;
-  pageSize: 50;
-  pageIndex: 1
+  pageSize: number = 50;
+  pageIndex: number = 1
   zoom = 8;
   lat = 50.271678;
   lng = 30.312568;
