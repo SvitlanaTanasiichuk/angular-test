@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { UsersService } from '../../shared/services/users.service';
 import { CurrentUser } from '../../shared/models/currentUser';
@@ -28,7 +28,7 @@ export class UserComponent implements OnInit {
     this.user$ = this.route.params
       .pipe(
         switchMap(params => {
-          return this.userService.getUserById(params['id']);
+          return this.userService.getUserById(params.id);
         })
       );
   }

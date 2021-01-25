@@ -48,11 +48,11 @@ export class UsersService {
    *  GET method for getting single user by ID
    */
   public getUserById(id: number) {
-    return this.http.get<CurrentUser>(`${url}/${id}`,
+    return this.http.get<ResponseModel>(`${url}/${id}`,
     {headers: this.headers}
     )
       .pipe(
-        map((res: CurrentUser) => res['result']),
+        map((res: ResponseModel) => res.result),
         catchError(this.handleError)
       );
   }
@@ -61,10 +61,10 @@ export class UsersService {
    *  GET method for getting current user
    */
   public getCurrentUser() {
-    return this.http.get<CurrentUser>(`${url}/current?expand=expand`,
+    return this.http.get<ResponseModel>(`${url}/current?expand=expand`,
     {headers: this.headers})
       .pipe(
-        map((res: CurrentUser) => res['result']),
+        map((res: ResponseModel) => res.result),
         catchError(this.handleError)
       );
   }

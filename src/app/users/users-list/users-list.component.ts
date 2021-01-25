@@ -1,9 +1,10 @@
-import { ResponseModel } from '../../shared/models/responseModel';
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { UsersService } from '../../shared/services/users.service';
+import { ResponseModel } from '../../shared/models/responseModel';
 
 @Component({
   selector: 'app-users-list',
@@ -34,8 +35,19 @@ export class UsersListComponent implements OnInit {
     this.loadAllUsers();
   }
 
-  // Subscription to load all users
+  // Observable$ to load all users
   loadAllUsers() {
-     this.users$ = this.userService.getAllUsers(this.pageSize, this.pageIndex);
-      }
+     this.users$ = this.userService.getAllUsers(this.pageSize, this.pageIndex)
+     .pipe(
+       map((users: ResponseModel) => {
+        this.resultLength = users._meta.pagination.totalCount;
+        this.pageIndex = users._meta.pagination.currentPage;
+        return users;
+       })
+     );
+  }
+
+  trackByUser(index: number, user: any): number {
+    return user.id;
+  }
 }

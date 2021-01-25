@@ -22,7 +22,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   submitted: boolean;
   profileSubscription: Subscription = null;
   userSubscription: Subscription = null;
-  deteteSubscription: Subscription = null;
+  deleteSubscription: Subscription = null;
+  imageSubscription: Subscription = null;
 
   constructor(
     private profileService: ProfileService,
@@ -39,8 +40,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.userSubscription.unsubscribe();
     } else if (this.profileSubscription) {
       this.profileSubscription.unsubscribe();
-    } else if (this.deteteSubscription) {
-      this.deteteSubscription.unsubscribe();
+    } else if (this.deleteSubscription) {
+      this.deleteSubscription.unsubscribe();
+    } else if (this.imageSubscription) {
+      this.imageSubscription.unsubscribe();
     }
   }
 
@@ -80,14 +83,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   // When image already upload submitting the form
   public onSubmit() {
-    this.profileService.updateProfileImage(this.imgForm.value.image);
-    this.imgForm.reset();
-    // this.imageData = null;
+    this.imageSubscription = this.profileService.updateProfileImage(this.imgForm.value.image)
+    .subscribe((res: CurrentUser) => {
+      this.imgForm.reset();
+      return res;
+    },
+    error => console.log(error)
+    );
   }
 
   // When  deleting the image
   public deleteImage() {
-    this.deteteSubscription = this.profileService.deleteProfileImage()
+    this.deleteSubscription = this.profileService.deleteProfileImage()
       .subscribe(res => res);
   }
 
@@ -98,20 +105,24 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
   }
 
+  private initializeForm() {
+    this.form = new FormGroup({
+      firstName: new FormControl(this.user.firstName, Validators.required),
+      lastName: new FormControl(this.user.lastName, Validators.required),
+      gender: new FormControl(this.user.gender, Validators.required),
+      country: new FormControl(this.user.country, Validators.required),
+      city: new FormControl(this.user.city, Validators.required),
+    });
+  }
+
     // Initialize component with params
     private getCurrentUser() {
       this.userSubscription = this.userService.getCurrentUser()
         .subscribe(user => {
           this.user = user;
-          this.form = new FormGroup({
-            firstName: new FormControl(this.user.firstName, Validators.required),
-            lastName: new FormControl(this.user.lastName, Validators.required),
-            gender: new FormControl(this.user.gender, Validators.required),
-            country: new FormControl(this.user.country, Validators.required),
-            city: new FormControl(this.user.city, Validators.required),
-          });
-        });
+          this.initializeForm();
+        },
+          error => console.log(error)
+        );
     }
-
-
 }

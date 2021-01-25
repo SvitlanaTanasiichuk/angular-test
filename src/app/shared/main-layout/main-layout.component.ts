@@ -47,7 +47,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
       lon: this.lng,
       perPage: 50,
       page: 1
-    }
+    };
     this.userSubscription = this.userService.getUserByParam(params)
       .subscribe((res: any) => {
         if (res) {

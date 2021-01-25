@@ -7,7 +7,10 @@
 </mat-paginator>
 </div>
 <ng-container *ngIf="users$ | async as users">
-  <mat-card  *ngFor="let user of users.result" class="current-user" [routerLink]="['../users/user/' + user.id]">
+  <div class="users">
+  <mat-card  *ngFor="let user of users.result; let i = index; trackBy: trackByUser"
+            class="current-user"
+            [routerLink]="['../users/user/' + user.id]">
     <mat-card-title>{{user?.firstName}}</mat-card-title>
     <mat-card-content>
       <img [src]="user.image">
@@ -18,6 +21,7 @@
       <p>{{user?.email}}</p>
     </mat-card-content>
 </mat-card>
+</div>
 </ng-container>
 
 

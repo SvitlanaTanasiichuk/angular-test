@@ -11,7 +11,6 @@ import { AuthService } from './auth/services/auth.service';
 import { AuthInterceptor } from './shared/services/auth.interceptor';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SearchPipe } from './shared/pipes/search.pipe';
 import { MaterialModule } from './shared/modules/material.module';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -20,9 +19,8 @@ import { MatButtonModule } from '@angular/material/button';
   declarations: [
     AppComponent,
     MainLayoutComponent,
-    HomeComponent,
-    SearchPipe
-  ],
+    HomeComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

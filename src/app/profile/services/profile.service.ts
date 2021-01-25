@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
-import {CurrentUser} from '../../shared/models/currentUser';
-import {catchError, map} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
-import {HttpClient} from '@angular/common/http';
-import {UsersService} from '../../shared/services/users.service';
+import { Observable } from 'rxjs';
+import { CurrentUser } from '../../shared/models/currentUser';
+import { catchError, map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { UsersService } from '../../shared/services/users.service';
 
 const url = `${environment.apiUrl}/v1/user`;
 
@@ -43,8 +43,10 @@ export class ProfileService {
     const profileData = new FormData();
     profileData.append('image', image);
     return this.http.post<CurrentUser>(`${url}/profile/image`, profileData)
-      .subscribe((res: CurrentUser) => res),
-      catchError(this.userService.handleError);
+      .pipe(
+        map(res => res),
+        catchError(this.userService.handleError)
+      );
   }
 
   /**

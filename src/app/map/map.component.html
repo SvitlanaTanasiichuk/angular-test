@@ -2,7 +2,7 @@
 <agm-map [latitude]="lat"
          [longitude]="lng"
          [zoom]="zoom">
-  <agm-marker *ngFor="let user of users.result; let i = index"
+  <agm-marker *ngFor="let user of users.result; let i = index; trackBy: trackByUser"
               [label]="(i + 1).toString()+'\u200b' "
               [latitude]="user?.lat"
               [longitude]="user?.lon">
